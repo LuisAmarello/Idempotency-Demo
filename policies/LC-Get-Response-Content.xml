@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<LookupCache continueOnError="false" enabled="true" name="LC-Get-Response-Content">
+    <DisplayName>LC-Get-Response-Content</DisplayName>
+    <Properties/>
+    <CacheKey>
+        <KeyFragment>getResponse</KeyFragment>
+        <KeyFragment ref="flow.request.headers.b-application"/>
+        <KeyFragment ref="flow.request.headers.authentication-code"/>
+        <KeyFragment ref="request.verb"/>
+        <KeyFragment ref="flow.request.uri"/>
+    </CacheKey>
+    <Scope>Proxy</Scope>
+    <AssignTo>flow.request.cache.getResponse</AssignTo>
+</LookupCache>

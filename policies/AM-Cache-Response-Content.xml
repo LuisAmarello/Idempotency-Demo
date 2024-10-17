@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage continueOnError="false" enabled="true" name="AM-Cache-Response-Content">
+    <DisplayName>AM-Cache-Response-Content</DisplayName>
+    <Properties/>
+    <Set>
+        <Payload contentType="application/json">
+            { "Cache" : {flow.request.cache.getResponse} }
+        </Payload>
+        <ReasonPhrase>OK</ReasonPhrase>
+        <StatusCode>200</StatusCode>
+    </Set>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <AssignTo createNew="false" transport="http" type="response"/>
+</AssignMessage>

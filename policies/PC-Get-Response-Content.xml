@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PopulateCache continueOnError="false" enabled="true" name="PC-Get-Response-Content">
+    <DisplayName>PC-Get-Response-Content</DisplayName>
+    <Properties/>
+    <CacheKey>
+        <KeyFragment>getResponse</KeyFragment>
+        <KeyFragment ref="flow.request.headers.b-application"/>
+        <KeyFragment ref="flow.request.headers.authentication-code"/>
+        <KeyFragment ref="request.verb"/>
+        <KeyFragment ref="flow.request.uri"/>
+    </CacheKey>
+    <Scope>Proxy</Scope>
+    <ExpirySettings>
+        <TimeoutInSeconds ref="flow.product.cache.expiry.time">5</TimeoutInSeconds>
+    </ExpirySettings>
+    <Source>response.content</Source>
+</PopulateCache>

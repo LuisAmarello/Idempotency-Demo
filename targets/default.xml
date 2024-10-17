@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<TargetEndpoint name="default">
+    <Description/>
+    <FaultRules/>
+    <PreFlow name="PreFlow">
+        <Request>
+            <Step>
+                <Name>AM-Disable-Path-Copy</Name>
+            </Step>
+        </Request>
+        <Response>
+            <Step>
+                <Condition>(lookupcache.LC-Encoded-Request-Idempotency.cachehit != true) and (request.verb == "POST") and (response.status.code == "200")</Condition>
+                <Name>PC-Encoded-Request-Idempotency</Name>
+            </Step>
+            <Step>
+                <Condition>(lookupcache.LC-Get-Response-Content.cachehit != true) and (request.verb == "GET") and (response.status.code == "200")</Condition>
+                <Name>PC-Get-Response-Content</Name>
+            </Step>
+        </Response>
+    </PreFlow>
+    <PostFlow name="PostFlow">
+        <Request/>
+        <Response/>
+    </PostFlow>
+    <Flows>
+        <Flow name="Post">
+            <Description/>
+            <Request/>
+            <Response/>
+            <Condition>(proxy.pathsuffix JavaRegex "(/post)") and (request.verb = "POST")</Condition>
+        </Flow>
+        <Flow name="Get">
+            <Description/>
+            <Request/>
+            <Response/>
+            <Condition>(proxy.pathsuffix MatchesPath "/get") and (request.verb = "GET")</Condition>
+        </Flow>
+    </Flows>
+    <HTTPTargetConnection>
+        <Properties/>
+        <URL>https://httpbin.org</URL>
+    </HTTPTargetConnection>
+</TargetEndpoint>

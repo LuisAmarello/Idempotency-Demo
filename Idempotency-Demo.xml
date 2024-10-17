@@ -1,0 +1,23 @@
+<APIProxy revision="14" name="Idempotency-Demo">
+    <DisplayName></DisplayName>
+    <Description>API used to give, query and revoke consent to access account information.</Description>
+    <CreatedAt>1728967110245</CreatedAt>
+    <LastModifiedAt>1728967110245</LastModifiedAt>
+    <BasePaths>/v1/idempotency-test</BasePaths>
+    <Policies>
+        <Policy>AM-Disable-Path-Copy</Policy>
+        <Policy>FC-Idempotency</Policy>
+        <Policy>LC-Encoded-Request-Idempotency</Policy>
+        <Policy>RF-Idempotency-Duplicated-Request</Policy>
+        <Policy>PC-Encoded-Request-Idempotency</Policy>
+        <Policy>LC-Get-Response-Content</Policy>
+        <Policy>PC-Get-Response-Content</Policy>
+        <Policy>AM-Cache-Response-Content</Policy>
+    </Policies>
+    <ProxyEndpoints>
+        <ProxyEndpoint>default</ProxyEndpoint>
+    </ProxyEndpoints>
+    <TargetEndpoints>
+        <TargetEndpoint>default</TargetEndpoint>
+    </TargetEndpoints>
+</APIProxy>

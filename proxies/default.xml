@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ProxyEndpoint name="default">
+    <PreFlow name="PreFlow">
+        <Request>
+            <Step>
+                <Name>FC-Idempotency</Name>
+            </Step>
+        </Request>
+        <Response/>
+    </PreFlow>
+    <Flows>
+        <Flow name="Post">
+            <Description/>
+            <Request>
+                <Step>
+                    <Name>LC-Encoded-Request-Idempotency</Name>
+                </Step>
+            </Request>
+            <Response>
+                <Step>
+                    <Condition>(lookupcache.LC-Encoded-Request-Idempotency.cachehit = true)</Condition>
+                    <Name>RF-Idempotency-Duplicated-Request</Name>
+                </Step>
+            </Response>
+            <Condition>(proxy.pathsuffix JavaRegex "(/post)") and (request.verb = "POST")</Condition>
+        </Flow>
+        <Flow name="Get">
+            <Description/>
+            <Request>
+                <Step>
+                    <Name>LC-Get-Response-Content</Name>
+                </Step>
+            </Request>
+            <Response>
+                <Step>
+                    <Condition>(lookupcache.LC-Get-Response-Content.cachehit = true)</Condition>
+                    <Name>AM-Cache-Response-Content</Name>
+                </Step>
+            </Response>
+            <Condition>(proxy.pathsuffix MatchesPath "/get") and (request.verb = "GET")</Condition>
+        </Flow>
+    </Flows>
+    <PostFlow name="PostFlow">
+        <Request/>
+        <Response/>
+    </PostFlow>
+    <HTTPProxyConnection>
+        <BasePath>/v1/idempotency-test</BasePath>
+    </HTTPProxyConnection>
+    <RouteRule name="noroute">
+        <Condition>(lookupcache.LC-Encoded-Request-Idempotency.cachehit = true) Or (lookupcache.LC-Get-Response-Content.cachehit = true)</Condition>
+    </RouteRule>
+    <RouteRule name="default">
+        <TargetEndpoint>default</TargetEndpoint>
+    </RouteRule>
+</ProxyEndpoint>

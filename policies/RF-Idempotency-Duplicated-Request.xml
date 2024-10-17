@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<RaiseFault continueOnError="false" enabled="true" name="RF-Idempotency-Duplicated-Request">
+    <DisplayName>RF-Idempotency-Duplicated-Request</DisplayName>
+    <Properties/>
+    <FaultResponse>
+        <Set>
+            <Headers>
+                <Header name="content-type">application/json</Header>
+            </Headers>
+            <Payload>
+                {
+                    "success":false,
+                    "message": "Request is duplicated."
+                }
+            </Payload>
+            <StatusCode>409</StatusCode>
+        </Set>
+    </FaultResponse>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+</RaiseFault>
